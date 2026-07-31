@@ -336,7 +336,7 @@ Día ligero, en día de oficina. Casi no compite por equipo, así que sirve igua
 | # | Bloque | Qué | Detalle |
 |---|---|---|---|
 | 1 | Calentamiento | Caminadora plana, ritmo cómodo | 5 min |
-| 2 | **Cardio zona 2** | Caminadora con inclinación 8–10% a 5–5.5 km/h · o bici estática · o escaladora | **28 min continuos.** Debes poder hablar en frases completas pero no cantar. FC aprox. 113–132 lpm. |
+| 2 | **Cardio zona 2** | Caminadora con inclinación 8–10% a 5–5.5 km/h · o bici estática · o escaladora | **28 min continuos.** Debes poder hablar en frases completas pero no cantar. En FC, guíate por la zona 2 de tu Apple Watch. |
 | 3 | Core | Plancha frontal 3 × 20–40 s · Muerto bicho 3 × 8/lado · Pallof press en polea 2 × 10/lado | 12 min, 60 s de descanso |
 | 4 | Movilidad | Isquiotibiales sentado 3×30 s/lado · flexor de cadera 3×30 s/lado · sentadilla profunda asistida 3×20 s · torácica en cuadrupedia 10/lado · gato-camello 10 | 10 min |
 
@@ -502,7 +502,7 @@ Cuatro cosas, en este orden:
 | Un día del fin de semana | Bici o caminata larga | 45–90 min | Zona 2 |
 | Todos los días | Pasos | Mes 1: 8,000 · Mes 2: 9,000 · Mes 3+: 10,000 | — |
 
-**Qué es "zona 2":** el ritmo al que **puedes hablar en frases completas pero no podrías cantar**. Ese es el test que importa. Si quieres el número: ~60–70% de tu FC máxima estimada (208 − 0.7 × 27 ≈ 189 lpm), o sea **113–132 lpm**. Tu Apple Watch te lo da en vivo.
+**Qué es "zona 2":** el ritmo al que **puedes hablar en frases completas pero no podrías cantar**. Ese es el test que importa. Si quieres el número: **usa la zona 2 que marca tu Apple Watch**, no una fórmula por edad. El reloj calcula sus zonas con el % de tu *reserva* de FC (fórmula de Karvonen, con tu FC en reposo real medida), mientras que el ~60–70% de la FC máxima estimada por edad (208 − 0.7 × 27 ≈ 189 lpm → 113–132 lpm) queda por debajo de tu zona 2 real — por eso el reloj y este documento no coincidían. El reloj es la fuente de verdad, y puedes copiar tu rango en el visor (tarjeta de Apple Watch → "Zona 2 de tu reloj").
 
 **Por qué no HIIT todavía.** Con tu base aeróbica actual (fatiga a los 2–5 min), los intervalos serían miserables, te dejarían destruido para las pesas del día siguiente, y con 90 kg de peso corporal correr desde el día 1 es la vía rápida a una molestia de rodilla o tobillo. El cardio de baja intensidad construye la base que hace que el HIIT tenga sentido después. **Desde la semana 10, si quieres, puedes meter 1 sesión semanal de intervalos** (6 × 1 min fuerte / 2 min suave en bici), reemplazando parte del cardio del miércoles.
 

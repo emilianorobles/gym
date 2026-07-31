@@ -21,19 +21,14 @@ Soy principiante absoluto en pesas. El plan es de 5 días (torso/pierna), sesion
 | Archivo | Qué es | ¿Lo consume el código? |
 |---|---|---|
 | **`plan-emi.json`** | **La fuente de la verdad.** Todo el plan estructurado: días, bloques, 48 ejercicios con sus cues, alternativas y prescripción. | **Sí. Es de donde sale todo.** |
-| **`index.html`** | El visor. Autocontenido: CSS, JS y **el JSON completo inyectado como `const DATA`**. | Es el producto. |
+| **`index.html`** | El visor. CSS y JS en un archivo; carga `plan-emi.json` con `fetch` al abrir. | Es el producto. |
 | **`plan-emi.md`** | El plan completo en prosa (~40 páginas): diagnóstico, por qué cada decisión, alimentación, métricas, progresión, cómo configurar el Apple Watch. | No. Es la referencia humana del *por qué*. |
 
-### Cómo se relacionan hoy (y el problema #1 a resolver)
+### Cómo se relacionan hoy
 
-El `index.html` se generaba con un script de Python que leía `plan-emi.json` y lo inyectaba minificado dentro de un `<script>`. **Ese script no está en el repo**, así que ahora mismo el JSON vive duplicado: el archivo suelto y el blob dentro del HTML.
+**Resuelto (2026-07-31) con la opción A:** el HTML ya no lleva el JSON inyectado; hace `fetch('./plan-emi.json')` al cargar. Se conservó el nombre `plan-emi.json` (no se renombró a `plan.json`) para no duplicar ni perder historial de git. Se perdió la propiedad de "un solo archivo por AirDrop"; a cambio, `sw.js` cachea `index.html` y el JSON, así que después de la primera visita la app abre sin señal.
 
-**Eso hay que arreglarlo antes que nada.** Dos opciones:
-
-- **A) Separar:** `plan.json` como archivo aparte y `fetch('./plan.json')` en el HTML. Limpio, editable, funciona en GitHub Pages. Se pierde la propiedad de "un solo archivo que puedo mandarme por AirDrop".
-- **B) Build step:** un script de Node que inyecte el JSON en el HTML (`npm run build`). Conserva el archivo único, agrega una dependencia de build.
-
-Yo me inclino por **A**, y si algún día necesito el archivo único, agrego un service worker que cachee ambos.
+El service worker es cache-primero con actualización en segundo plano: un cambio a `index.html` o `plan-emi.json` aparece en la **siguiente** carga, no en la actual.
 
 ---
 
@@ -103,12 +98,21 @@ Son distintos a propósito. El slot es identidad; el badge es presentación.
 
 ```
 fase                      → 'adaptacion' | 'principal'
+unidad                    → 'kg' | 'lb'   solo presentación; w| SIEMPRE guarda kg canónicos
+zonas                     → JSON {"z2min":125,"z2max":140}   zona 2 real del Apple Watch
 s|{dia}|{slot}|{i}        → 'YYYY-MM-DD'   serie marcada; solo cuenta si === hoy (se limpia sola cada día)
 a|{dia}|{slot}            → 'YYYY-MM-DD@ejercicioId'   aparato sustituido, también expira diario
-w|{ejercicioId}           → string   peso en kg, o texto libre en cardio. PERMANENTE, es mi historial
+w|{ejercicioId}           → string   peso en kg (fuerza) o "vel · incl · nivel" (cardio; '–' = vacío,
+                            los valores viejos de texto libre se muestran pero no parsean). PERMANENTE
 o|{dia}|{fase}            → JSON array de slots   orden personalizado del drag & drop. Permanente
 sc|{dia}                  → int   posición del scroll
 ```
+
+**Blindaje (2026-07-31):** el JS nunca toca `localStorage` directo; todo pasa por `lee/guarda/borra`,
+que operan sobre un objeto en memoria y persisten como mejor esfuerzo (try/catch). Si escribir truena
+(file://, modo privado, cuota), la UI sigue funcionando en la sesión. Ese era el bug de "los chips de
+alternativas no responden" en la copia AirDrop: `setAlt` era la primera línea del handler y su
+excepción mataba el tap.
 
 `{dia}` es la llave en minúsculas y sin acento: `lunes` · `martes` · `miercoles` · `jueves` · `viernes`.
 
@@ -139,19 +143,28 @@ Cada una tiene una razón. Si vas a cambiarlas, cámbialas a propósito.
 
 8. **El toggle de fase es manual.** Podría calcularse desde una fecha de inicio, pero prefiero controlarlo yo: si me enfermo una semana, la fase no debe avanzar sola.
 
+9. **Los pesos se guardan en kg canónicos aunque el toggle esté en lb.** La conversión es solo de pantalla (entrada en lb → kg redondeado a 2 decimales; salida → lb redondeada a 0.5). Así el historial `w|` nunca se contamina de unidades mezcladas.
+
+10. **Sin IA por ahora (decidido 2026-07-31).** La progresión doble es una regla determinista y no necesita un modelo; un chat/informe de IA solo tendrá algo que analizar cuando exista el historial por sesión (rumbo #2). Cuando llegue, la vía barata es un botón "informe para IA" que copia plan+datos al portapapeles para pegarse en cualquier app de IA — cero API, cero costo. No integrar APIs de pago ni keys en el repo (es público).
+
+11. **Las zonas de FC vienen del reloj, no de fórmulas.** El Apple Watch calcula zonas con % de reserva de FC (Karvonen con FC en reposo real); la fórmula por edad (113–132) quedaba abajo y por eso no cuadraba. El usuario copia su zona 2 una vez en "Zona 2 de tu reloj ⚙" (tarjeta Apple Watch) y las tarjetas de cardio muestran ese rango.
+
+12. **La celebración de día completo no tiene sonido a propósito** y solo dispara en la transición a completo dentro de la sesión (nunca al cargar). Con `prefers-reduced-motion` solo sale el toast, sin fuegos.
+
 ---
 
 ## 6. Deuda técnica y cosas que faltan
 
 **Alto (arréglalo pronto)**
-- El JSON duplicado (sección 2). Es lo primero.
-- Sin service worker: si Safari recarga sin señal, no abre. Para una app que uso en un gym con mala señal, esto importa.
-- Sin exportar/respaldar. Si limpio los datos de Safari, pierdo todo mi historial de pesos. Necesito al menos un "descargar mis datos como JSON".
+- ~~El JSON duplicado~~ ✓ Resuelto 2026-07-31: `fetch('./plan-emi.json')`, ver sección 2.
+- ~~Sin service worker~~ ✓ Resuelto 2026-07-31: `sw.js`, cache-primero con actualización en segundo plano.
+- ~~Sin exportar/respaldar~~ ✓ Resuelto 2026-07-31: botón "Exportar mis datos" en el footer descarga todo el localStorage como JSON (`{app, esquema, planVersion, exportadoEl, datos}`).
 - Todo es un solo archivo con render por `innerHTML`. Funciona, pero para seguir creciendo necesita módulos y no reconstruir el DOM completo en cada acción.
 
 **Medio**
 - El historial de pesos solo guarda **el último** valor. No hay serie temporal, así que no puedo ver progresión ni detectar estancamiento — que es justo lo que el plan me pide revisar cada 4 semanas.
 - El campo de peso es uno por ejercicio, no uno por serie. En la práctica a veces bajo peso en la última serie.
+- El respaldo se exporta pero no hay importación: restaurar un respaldo es manual (volcar `datos` a localStorage llave por llave).
 - `contencionHoraPico` está en el JSON y no se usa. Podría marcar qué aparatos se atoran a esa hora.
 - `fotoUrl` está en todos los ejercicios y siempre es `null`. La idea era una foto de la máquina real de Candiles.
 - Los bloques `nutricion`, `metricas` y `progresion` del JSON no se usan. Son pantallas futuras.
@@ -179,6 +192,8 @@ En orden:
 
 ## 8. Verificación que debe seguir pasando
 
+Vive en `verifica.js` (sin dependencias): `node verifica.js`. Replica la lógica del visor (`base()` y el cálculo de series de `tarjeta()`).
+
 ```js
 // 1. Todo id referenciado existe
 // 2. Toda alternativa existe y son exactamente 2 por ejercicio
@@ -202,7 +217,7 @@ Valores esperados hoy (series por `descansoSeg`):
 ## 9. Restricciones
 
 - **Objetivo: Safari en iPhone.** Se usa como app agregada a la pantalla de inicio.
-- **Se hospeda en GitHub Pages.** Estático, sin backend, sin secretos.
+- **Se hospeda en GitHub Pages:** `https://emilianorobles.github.io/gym/`. Estático, sin backend, sin secretos. (Ojo: si el repo se vuelve privado, Pages se desactiva y NO se reactiva solo al volverlo público — pasó en julio 2026.) La vía "un archivo por AirDrop" quedó retirada: con el JSON separado, `fetch` no funciona en `file://`.
 - **Un solo usuario.** No agregues autenticación ni multiusuario.
 - **Español**, sistema métrico, nombres de ejercicio en español con el inglés abajo (las máquinas están etiquetadas en inglés).
 - **La legibilidad de un vistazo gana sobre la densidad de información.** Si algo requiere que me detenga a leer, va plegado o no va.

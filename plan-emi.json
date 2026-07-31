@@ -1,14 +1,14 @@
 {
   "plan": {
     "nombre": "Torso/Pierna 5 dias - Emi - Planet Fitness Plaza Candiles",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "fechaGeneracion": "2026-07-27",
     "fase": "principal",
     "semanas": 8,
     "semanasAdaptacion": 3,
     "objetivo": "Perdida de grasa preservando masa muscular; frecuencia 2x por mitad del cuerpo",
     "notaFases": "Un solo documento cubre ambas fases. En semanas 1-3 usa 'seriesAdaptacion' y 'rirAdaptacion' de cada ejercicio en lugar de 'series' y 'rir'.",
-    "notaVersion": "v1.2: cardio, calentamiento y enfriamiento pasan a ser slots con la misma estructura que los ejercicios de fuerza. Se agrega unidadReps (seg / por lado) donde las reps no son repeticiones normales, y notas de vinculacion del equipo de cardio con el Apple Watch. Los id no cambiaron."
+    "notaVersion": "v1.3: la referencia de FC para zona 2 remite al Apple Watch en vez de lpm fijos. El reloj calcula sus zonas con % de reserva de FC (formula de Karvonen con tu FC en reposo real medida); los 113-132 lpm anteriores venian de 60-70% de la FCmax estimada por edad y quedaban abajo de la zona 2 real del reloj. Los id no cambiaron. (v1.2: cardio/calentamiento/enfriamiento como slots, unidadReps, notas de vinculacion con Apple Watch.)"
   },
   "dias": [
     {
@@ -1512,7 +1512,7 @@
       "incrementoSugerido": "No aplica. Reps = minutos.",
       "contencionHoraPico": "baja",
       "ajusteMaquina": "No aplica.",
-      "notaPesoInicial": "Zona 2: puedes hablar en frases completas pero no cantar. FC aprox 113-132 lpm. Semanas 1-2: solo 5-8 min.",
+      "notaPesoInicial": "Zona 2: puedes hablar en frases completas pero no cantar. En FC guiate por la zona 2 que marca tu Apple Watch (usa tu reserva de FC real, no una estimacion por edad). Semanas 1-2: solo 5-8 min.",
       "musculos": [
         "cardiovascular"
       ],
