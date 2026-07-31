@@ -21,7 +21,9 @@ Soy principiante absoluto en pesas. El plan es de 5 días (torso/pierna), sesion
 | Archivo | Qué es | ¿Lo consume el código? |
 |---|---|---|
 | **`plan-emi.json`** | **La fuente de la verdad.** Todo el plan estructurado: días, bloques, 48 ejercicios con sus cues, alternativas y prescripción. | **Sí. Es de donde sale todo.** |
-| **`index.html`** | El visor. CSS y JS en un archivo; carga `plan-emi.json` con `fetch` al abrir. | Es el producto. |
+| **`index.html`** | Estructura del visor. Carga `styles.css` y `app.js`; los datos vienen de `plan-emi.json` vía `fetch`. | Es el producto. |
+| **`styles.css`** | Sistema de diseño: tokens, tema claro/oscuro, chrome glass, componentes, motion. | Sí. |
+| **`app.js`** | Toda la lógica del visor (estado, render, interacción, hápticos, tema). | Sí. |
 | **`plan-emi.md`** | El plan completo en prosa (~40 páginas): diagnóstico, por qué cada decisión, alimentación, métricas, progresión, cómo configurar el Apple Watch. | No. Es la referencia humana del *por qué*. |
 
 ### Cómo se relacionan hoy
@@ -99,6 +101,7 @@ Son distintos a propósito. El slot es identidad; el badge es presentación.
 ```
 fase                      → 'adaptacion' | 'principal'
 unidad                    → 'kg' | 'lb'   solo presentación; w| SIEMPRE guarda kg canónicos
+tema                      → 'auto' | 'claro' | 'oscuro'   auto sigue prefers-color-scheme
 zonas                     → JSON {"z2min":125,"z2max":140}   zona 2 real del Apple Watch
 s|{dia}|{slot}|{i}        → 'YYYY-MM-DD'   serie marcada; solo cuenta si === hoy (se limpia sola cada día)
 a|{dia}|{slot}            → 'YYYY-MM-DD@ejercicioId'   aparato sustituido, también expira diario
@@ -151,6 +154,14 @@ Cada una tiene una razón. Si vas a cambiarlas, cámbialas a propósito.
 
 12. **La celebración de día completo no tiene sonido a propósito** y solo dispara en la transición a completo dentro de la sesión (nunca al cargar). Con `prefers-reduced-motion` solo sale el toast, sin fuegos.
 
+13. **El chrome (header y tab bar) es oscuro en AMBOS temas, a propósito.** En PWA standalone la barra de estado de iOS (`black-translucent`) usa texto blanco; si el header fuera claro, la hora y la batería serían ilegibles. Además conserva la identidad neón. Solo el contenido cambia de tema.
+
+14. **La tab bar de días va abajo (cápsula flotante)** porque el caso de uso es una mano entre series: la zona del pulgar está abajo. Patrón de iOS 26. Lleva `env(safe-area-inset-bottom)` para el home indicator.
+
+15. **Hápticos:** `vibra()` en app.js usa `navigator.vibrate` (solo Android) y, en iOS, el click programático a un label de `<input type="checkbox" switch>` que dispara el Taptic Engine. Funciona en iOS 17.4–26.4; **Apple lo parchó en iOS 26.5** — ahí queda en silencio sin romper nada. No hay forma oficial de vibrar desde web en iOS.
+
+16. **El motion usa el stack de Safari 26** — View Transitions same-document al cambiar de día/tema, `@starting-style`-style entrada con stagger (clase `.anima`, solo en carga y cambio de día, no en re-renders por interacción), `interpolate-size`/`::details-content` para animar los plegados. Todo con fallback silencioso y apagado bajo `prefers-reduced-motion`.
+
 ---
 
 ## 6. Deuda técnica y cosas que faltan
@@ -159,7 +170,7 @@ Cada una tiene una razón. Si vas a cambiarlas, cámbialas a propósito.
 - ~~El JSON duplicado~~ ✓ Resuelto 2026-07-31: `fetch('./plan-emi.json')`, ver sección 2.
 - ~~Sin service worker~~ ✓ Resuelto 2026-07-31: `sw.js`, cache-primero con actualización en segundo plano.
 - ~~Sin exportar/respaldar~~ ✓ Resuelto 2026-07-31: botón "Exportar mis datos" en el footer descarga todo el localStorage como JSON (`{app, esquema, planVersion, exportadoEl, datos}`).
-- Todo es un solo archivo con render por `innerHTML`. Funciona, pero para seguir creciendo necesita módulos y no reconstruir el DOM completo en cada acción.
+- ~~Todo es un solo archivo~~ ✓ Resuelto 2026-07-31: `index.html` + `styles.css` + `app.js` (sin build). El render sigue siendo `innerHTML` completo por acción — aceptable a esta escala; si crece, migrar a render por tarjeta.
 
 **Medio**
 - El historial de pesos solo guarda **el último** valor. No hay serie temporal, así que no puedo ver progresión ni detectar estancamiento — que es justo lo que el plan me pide revisar cada 4 semanas.

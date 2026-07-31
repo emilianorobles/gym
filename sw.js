@@ -1,8 +1,8 @@
 // Estrategia: cache primero, actualización en segundo plano (stale-while-revalidate).
 // El gym tiene señal mala: la app debe abrir al instante desde cache aunque no haya red.
 // Un cambio en index.html o plan-emi.json aparece en la SIGUIENTE carga, no en la actual.
-const CACHE = 'rutina-v1';
-const ASSETS = ['./', './index.html', './plan-emi.json'];
+const CACHE = 'rutina-v2';
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './plan-emi.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
