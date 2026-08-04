@@ -38,14 +38,14 @@ El service worker es cache-primero con actualización en segundo plano: un cambi
 
 ```
 {
-  plan:      { nombre, version, fechaGeneracion, fase, semanas, semanasAdaptacion, objetivo, notaFases, notaVersion }
+  plan:      { nombre, version, fechaGeneracion, semanas, objetivo, notaVersion }
   dias:      [ { dia, enfoque, horaRecomendada, horaRespaldo, notaMultitudes,
                  duracionTotalMin,
                  bloques: [ { tipo, nombre, duracionMin, ejercicios: [id...] } ],
-                 appleWatch: { nota, bloques: [{series, descansoSeg}], bloquesAdaptacion: [...] } } ]
+                 appleWatch: { nota, bloques: [{series, descansoSeg}] } } ]
   ejercicios:[ { id, nombre:{es,en}, equipo, tipo, enPlan,
-                 series, seriesAdaptacion, repsMin, repsMax, unidadReps,
-                 descansoSeg, rir, rirAdaptacion, incrementoSugerido,
+                 series, repsMin, repsMax, unidadReps,
+                 descansoSeg, rir, incrementoSugerido,
                  contencionHoraPico, ajusteMaquina, notaPesoInicial,
                  musculos[], cues[], erroresComunes[], fotoUrl, alternativas[2] } ]
   progresion:{ ... }   // no lo usa el visor todavía
@@ -60,14 +60,14 @@ El service worker es cache-primero con actualización en segundo plano: un cambi
 - `unidadReps`: `reps` · `seg` · `por lado` · `min`
 - `contencionHoraPico`: `alta` · `media` · `baja` (qué tan peleado está el aparato en hora pico; el visor todavía no lo usa)
 
-**34 ejercicios con `enPlan: true`** (están en algún día) y **14 con `false`** (existen solo como alternativas).
+**34 ejercicios con `enPlan: true`** (están en algún día) y **18 con `false`** (existen solo como alternativas; incluyen los 4 que salieron del plan en v2.0 — extensión de piernas, curl de bíceps en máquina, máquina de glúteos y prensa de tríceps — con su historial de pesos intacto).
 
 ### Invariantes que NO se deben romper
 
 1. **Los `id` son slugs estables y son la llave de todo lo que guardo.** Si renombras un `id`, pierdo el historial de pesos de ese aparato. Al ajustar el plan, conserva los `id` que sobrevivan y crea nuevos solo para lo que de verdad cambie.
 2. **`alternativas` siempre tiene exactamente 2 elementos**, y ambos existen en `ejercicios`. El visor asume esto para dibujar los 3 chips (prescrito + 2). Hay una verificación en el punto 8.
 3. **`unidadReps: 'min'` significa que `repsMin`/`repsMax` son minutos, no repeticiones.** Aplica a cardio, calentamiento y enfriamiento. `'seg'` aplica a la plancha.
-4. **`seriesAdaptacion: 0` es una bandera, no un cero.** Significa "este ejercicio no entra en la fase de adaptación, sustitúyelo por `alternativas[0]`". Hoy solo aplica al peso muerto rumano.
+4. ~~`seriesAdaptacion: 0` es una bandera~~ **Histórico (retirado en v2.0, 2026-08-04):** la fase de adaptación ya no existe; `seriesAdaptacion`, `rirAdaptacion` y `bloquesAdaptacion` se eliminaron del esquema. `verifica.js` falla si reaparecen.
 
 ---
 
@@ -99,7 +99,8 @@ Son distintos a propósito. El slot es identidad; el badge es presentación.
 ### localStorage — NO cambies estas llaves sin migración
 
 ```
-fase                      → 'adaptacion' | 'principal'
+fase                      → RETIRADA (v2.0). Puede existir con valor viejo; la app la ignora.
+                            OJO: kOrd sigue generando 'o|{dia}|principal' A PROPÓSITO (sin migración)
 unidad                    → 'kg' | 'lb'   solo presentación; w| SIEMPRE guarda kg canónicos
 tema                      → 'auto' | 'claro' | 'oscuro'   auto sigue prefers-color-scheme
 zonas                     → JSON {"z2min":125,"z2max":140}   zona 2 real del Apple Watch
@@ -144,7 +145,9 @@ Cada una tiene una razón. Si vas a cambiarlas, cámbialas a propósito.
 
 7. **`localStorage` sin backend.** Un usuario, un dispositivo. No hay cuentas ni sincronización, y por ahora no las necesito.
 
-8. **El toggle de fase es manual.** Podría calcularse desde una fecha de inicio, pero prefiero controlarlo yo: si me enfermo una semana, la fase no debe avanzar sola.
+8. ~~El toggle de fase es manual~~ **Retirado (2026-08-04):** el usuario terminó la adaptación en la semana 2 por decisión propia y el plan pasó a fase única (v2.0). El segmentado desapareció del header.
+
+8b. **En la máquina asistida (dominadas/fondos) el peso guardado en `w|` es la AYUDA, no la carga.** Más placa = más fácil; progresar = bajar placas. Está documentado en los cues del ejercicio; no lo "corrijas" al ver que el número baja con el tiempo.
 
 9. **Los pesos se guardan en kg canónicos aunque el toggle esté en lb.** La conversión es solo de pantalla (entrada en lb → kg redondeado a 2 decimales; salida → lb redondeada a 0.5). Así el historial `w|` nunca se contamina de unidades mezcladas.
 
@@ -208,20 +211,21 @@ Vive en `verifica.js` (sin dependencias): `node verifica.js`. Replica la lógica
 ```js
 // 1. Todo id referenciado existe
 // 2. Toda alternativa existe y son exactamente 2 por ejercicio
-// 3. Las series que muestra el visor deben cuadrar con appleWatch.bloques,
-//    agrupadas por descansoSeg, en AMBAS fases. Esto es la prueba crítica:
-//    si se rompe, mi reloj me marca descansos equivocados.
+// 3. v2.0: sin campos de adaptación, y todo ejercicio principal con series >= 3
+// 4. Las series que muestra el visor deben cuadrar con appleWatch.bloques,
+//    agrupadas por descansoSeg. Esto es la prueba crítica: si se rompe,
+//    mi reloj me marca descansos equivocados.
 ```
 
-Valores esperados hoy (series por `descansoSeg`):
+Valores esperados hoy (series por `descansoSeg`, plan v2.0 de fase única):
 
-| Día | Semanas 1–2 | Semana 3+ |
-|---|---|---|
-| lunes | 90s:4 · 60s:6 | 90s:6 · 60s:7 |
-| martes | 90s:8 · 60s:4 | 90s:12 · 60s:4 |
-| miercoles | 60s:6 | 60s:8 |
-| jueves | 90s:2 · 60s:10 | 90s:6 · 60s:9 |
-| viernes | 90s:6 · 60s:6 | 90s:9 · 60s:7 |
+| Día | Bloques |
+|---|---|
+| lunes | 90s:9 · 60s:6 |
+| martes | 90s:15 · 60s:3 |
+| miercoles | 60s:9 |
+| jueves | 90s:9 · 60s:9 |
+| viernes | 90s:12 · 60s:6 |
 
 ---
 

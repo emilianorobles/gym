@@ -33,7 +33,9 @@ const lee=k=> k in mem ? mem[k] : null;
 const guarda=(k,v)=>{mem[k]=String(v); try{localStorage.setItem(k,v)}catch(e){}};
 const borra=k=>{delete mem[k]; try{localStorage.removeItem(k)}catch(e){}};
 
-let fase = lee('fase') || 'adaptacion';
+// La fase de adaptacion se retiro (plan v2.0). El valor queda fijo porque kOrd
+// genera 'o|{dia}|principal' y asi el orden guardado sobrevive sin migracion.
+const fase = 'principal';
 let unidad = lee('unidad') || 'kg';
 let tema = ['auto','claro','oscuro'].includes(lee('tema')) ? lee('tema') : 'auto';
 let zonas = null; try{ zonas=JSON.parse(lee('zonas')||'null') }catch(e){}
@@ -50,7 +52,6 @@ const getSet=(d,n,i)=>lee(kSet(d,n,i))===today();
 const setSet=(d,n,i,on)=>on?guarda(kSet(d,n,i),today()):borra(kSet(d,n,i));
 function getAlt(d,n){const v=lee(kAlt(d,n));if(!v)return null;const[f,id]=v.split('@');return f===today()?id:null}
 const setAlt=(d,n,id)=>id?guarda(kAlt(d,n),today()+'@'+id):borra(kAlt(d,n));
-const base=id=>{const e=EX[id];return(fase==='adaptacion'&&e.seriesAdaptacion===0)?EX[e.alternativas[0]]:e};
 const menosMovimiento=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ===== Tema: auto sigue al sistema; claro/oscuro lo fuerzan con data-tema =====
@@ -103,10 +104,10 @@ function tri(id,wt){
 
 function tarjeta(orig, slot, esFuerza, badge, ix){
   const altId=getAlt(dia,slot), e=altId?EX[altId]:orig;
-  const ns = esFuerza ? ((fase==='adaptacion'?orig.seriesAdaptacion:orig.series)||orig.series) : 1;
+  const ns = esFuerza ? orig.series : 1;
   const hechas=[...Array(ns)].filter((_,i)=>getSet(dia,slot,i)).length;
   const rango = e.repsMin===e.repsMax ? e.repsMin : e.repsMin+'–'+e.repsMax;
-  const uni = e.unidadReps||'reps', rir = fase==='adaptacion'?orig.rirAdaptacion:orig.rir;
+  const uni = e.unidadReps||'reps', rir = orig.rir;
   const wt = lee(kWt(e.id));
   const esCardio = e.tipo==='cardio' || e.id==='calentamiento-cardio-suave';
   const conChips = CHIPS.has(e.tipo) || e.id==='calentamiento-cardio-suave';
@@ -151,12 +152,11 @@ function tarjeta(orig, slot, esFuerza, badge, ix){
 function render(restaurar){
   days.innerHTML = DAYS.map(d=>{const[a,b]=ABBR[d.dia];
     return `<button class="day" role="tab" data-d="${d.dia}" aria-selected="${d.dia===dia}"><b>${a}</b><s>${b}</s></button>`}).join('');
-  pA.setAttribute('aria-pressed',fase==='adaptacion'); pB.setAttribute('aria-pressed',fase!=='adaptacion');
   uKg.setAttribute('aria-pressed',unidad==='kg'); uLb.setAttribute('aria-pressed',unidad==='lb');
   const d = DAYS.find(x=>x.dia===dia);
   ttl.textContent=d.enfoque;
   sub.textContent=`${d.horaRecomendada}  ·  respaldo ${d.horaRespaldo||'—'}  ·  ${d.duracionTotalMin} min`;
-  const aw=d.appleWatch?(fase==='adaptacion'?d.appleWatch.bloquesAdaptacion:d.appleWatch.bloques):[];
+  const aw=d.appleWatch?d.appleWatch.bloques:[];
   watch.innerHTML = aw.length
     ? aw.map((b,i)=>`<div class="blk"><div class="lbl">Bloque ${i+1}</div><div class="n">⟳ ${b.series} <span>· ${b.descansoSeg}s</span></div></div>`).join('')
     : '<div class="blk"><div class="n" style="font-size:14px">Sin bloques</div></div>';
@@ -164,7 +164,7 @@ function render(restaurar){
   // construir items en orden natural, luego aplicar el orden guardado a los de fuerza
   let slot=0, num=0, items=[];
   d.bloques.forEach(b=>b.ejercicios.forEach(rawId=>{
-    slot++; const esFuerza=b.tipo==='principal'; const orig=base(rawId);
+    slot++; const esFuerza=b.tipo==='principal'; const orig=EX[rawId];
     items.push({slot, esFuerza, orig, badge: esFuerza?String(++num).padStart(2,'0'):AUX[b.tipo]});
   }));
   const guardado = JSON.parse(lee(kOrd(dia))||'null');
@@ -331,8 +331,6 @@ addEventListener('scroll',()=>{ if(drag) return; clearTimeout(t);
   t=setTimeout(()=>guarda(kScr(dia), Math.round(scrollY)),160)},{passive:true});
 days.addEventListener('click',ev=>{const b=ev.target.closest('.day');
   if(b && b.dataset.d!==dia){ vibra(6); cambiaDia(b.dataset.d); }});
-pA.onclick=()=>{fase='adaptacion';guarda('fase',fase);render(false)};
-pB.onclick=()=>{fase='principal'; guarda('fase',fase);render(false)};
 uKg.onclick=()=>{ if(unidad!=='kg'){unidad='kg';guarda('unidad',unidad);render(false)} };
 uLb.onclick=()=>{ if(unidad!=='lb'){unidad='lb';guarda('unidad',unidad);render(false)} };
 reset.onclick=()=>{

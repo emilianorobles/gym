@@ -19,16 +19,12 @@ try{const t=localStorage.getItem('tema');if(t==='claro'||t==='oscuro')document.d
     <div style="flex:1;min-width:0"><h1 id="ttl"></h1><p id="sub"></p></div>
     <button id="btnTema" class="icono" aria-label="Tema">◐</button>
   </div>
-  <div class="fila2">
-    <div class="phase" role="group" aria-label="Fase del plan">
-      <button id="pA" aria-pressed="true">Semanas 1–2</button>
-      <button id="pB" aria-pressed="false">Semana 3+</button>
-    </div>
+  <div class="prog">
     <div class="unit" role="group" aria-label="Unidad de peso">
       <button id="uKg" aria-pressed="true">kg</button><button id="uLb" aria-pressed="false">lb</button>
     </div>
+    <div class="track"><div class="fill" id="fill"></div></div><span class="pct" id="pct">0/0</span>
   </div>
-  <div class="prog"><div class="track"><div class="fill" id="fill"></div></div><span class="pct" id="pct">0/0</span></div>
 </header>
 <div class="watch"><div class="lbl">Apple Watch · bloques de hoy</div><div class="row" id="watch"></div><div id="aviso"></div>
   <details id="zdet"><summary>Zona 2 de tu reloj ⚙</summary>

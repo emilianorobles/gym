@@ -205,6 +205,8 @@ Y hay una ventaja geográfica que probablemente ya sabes pero vale la pena hacer
 
 ## 4. Fase de adaptación — semanas 1 a 3
 
+> **RETIRADA el 2026-08-04 (plan v2.0).** Emi completó ~1.5 semanas de adaptación y decidió pasar al plan completo. Esta sección queda como referencia histórica. Al retirarla: todos los ejercicios de fuerza subieron a mínimo 3 series, y entraron 4 compuestos (zancadas, dominadas asistidas, hip thrust en Smith y fondos asistidos) en lugar de 4 aislados, que quedaron como alternativas. **Transición sensata: la primera semana del plan completo trabaja con RIR 3–4** (el objetivo que esta fase marcaba para la semana 3) **antes de bajar al RIR 2–3 definitivo**, y las zancadas empiezan solo con peso corporal. En la máquina asistida, recuerda: la placa es la AYUDA — más placa es más fácil, y progresar es quitarle.
+
 Estas tres semanas **no son el plan principal con menos peso**. Son un plan distinto con un objetivo distinto: que la semana 4 te encuentre sabiendo la técnica, con un número anotado en cada máquina, y con ganas de ir. Nada más.
 
 ### 4.1 Qué cambia respecto al plan principal
@@ -214,7 +216,7 @@ Estas tres semanas **no son el plan principal con menos peso**. Son un plan dist
 | Series por ejercicio | 2 | 2 | 3 | 3 (según tabla) |
 | RIR objetivo | 5 | 4–5 | 4 | 2–3 |
 | Cardio al final | 5 min suave | 8 min | 10 min | 10–12 min |
-| Ejercicios pospuestos | Zancadas y peso muerto rumano se sustituyen por extensión de espalda y prensa de piernas | | | Se incorporan |
+| Ejercicios pospuestos | Zancadas y peso muerto rumano se sustituyen por extensión de espalda y prensa de piernas | | | Se incorporan ✓ *(hecho en v2.0, 2026-08-04)* |
 
 **El objetivo de la semana 1 es salir del gym pensando "podía más".** Si sales arrastrándote, la hiciste mal. No es humildad: es que el dolor de la semana 1 es lo que hace que la gente no vuelva la semana 2.
 
@@ -291,7 +293,7 @@ Entonces **"3 × 10–12"** significa: **3 series, de 10 a 12 repeticiones cada 
 - Los ejercicios 1 y 2 de cada día son intercambiables entre sí. Del 3 en adelante, respeta el orden.
 
 ### LUNES — Tren inferior A
-**Calentamiento 8 min · Bloque principal 34 min · Cardio 12 min · Enfriamiento 6 min**
+**Calentamiento 8 min · Bloque principal 30 min · Cardio 12 min · Enfriamiento 6 min**
 
 **Calentamiento (8 min)**
 1. 4 min bici estática o caminadora inclinada, suave (debes poder hablar sin esfuerzo)
@@ -302,15 +304,15 @@ Entonces **"3 × 10–12"** significa: **3 series, de 10 a 12 repeticiones cada 
 |---|---|---|---|---|---|---|---|---|
 | 1 | **Prensa de piernas** (Leg press) | Prensa de piernas | 3 × 10–12 | 90 s | 3 | Sentadilla en Smith | Sentadilla copa con mancuerna | Baja hasta que la pelvis esté a punto de despegarse del asiento. No bloquees rodillas arriba. |
 | 2 | **Sentadilla en Smith** (Smith machine squat) | Smith | 3 × 8–10 | 90 s | 3 | Prensa de piernas con pies altos | Sentadilla copa con mancuerna | Barra en el trapecio, pies un paso adelante. Baja solo hasta donde la espalda no se redondee. |
-| 3 | **Curl femoral sentado** (Seated leg curl) | Curl de piernas sentado | 3 × 10–12 | 60 s | 2 | Máquina de glúteos | Peso muerto rumano con mancuernas | Eje de la máquina alineado con la rodilla. Baja lento, 3 segundos. |
-| 4 | **Extensión de piernas** (Leg extension) | Extensión de piernas | 2 × 12–15 | 60 s | 2 | Prensa de piernas pies bajos | Sentadilla copa con mancuerna | Pausa 1 s arriba. No azotes la pila al bajar. |
-| 5 | **Extensión de espalda** (Back extension) | Extensión de espalda | 2 × 12–15 | 60 s | 3 | Máquina de glúteos | Puente de glúteo en el piso | Cojín debajo del hueso de la cadera. El movimiento sale de la cadera, no de la espalda baja. |
+| 3 | **Zancadas con mancuernas** (Dumbbell lunges) *(nuevo en v2.0)* | Mancuernas | 3 × 8–10/lado | 90 s | 3 | Extensión de piernas | Sentadilla copa con mancuerna | Primera sesión solo peso corporal: el equilibrio es lo difícil. Paso largo, torso vertical, rodilla trasera casi al piso. |
+| 4 | **Curl femoral sentado** (Seated leg curl) | Curl de piernas sentado | 3 × 10–12 | 60 s | 2 | Máquina de glúteos | Peso muerto rumano con mancuernas | Eje de la máquina alineado con la rodilla. Baja lento, 3 segundos. |
+| 5 | **Extensión de espalda** (Back extension) | Extensión de espalda | 3 × 12–15 | 60 s | 3 | Máquina de glúteos | Puente de glúteo en el piso | Cojín debajo del hueso de la cadera. El movimiento sale de la cadera, no de la espalda baja. |
 
 **Cardio (12 min):** bici estática o caminadora con inclinación, zona 2 (puedes hablar en frases completas pero no cantar).
 **Enfriamiento (6 min):** isquiotibiales sentado 2×30 s/lado · cuádriceps de pie 2×30 s/lado · flexor de cadera en zancada 2×30 s/lado · 1 min de respiración lenta.
 
 ### MARTES — Tren superior A
-**Calentamiento 8 min · Bloque principal 44 min · Enfriamiento 8 min**
+**Calentamiento 8 min · Bloque principal 38 min · Enfriamiento 8 min**
 
 **Calentamiento (8 min)**
 1. 4 min bici o caminadora suave
@@ -323,13 +325,13 @@ Entonces **"3 × 10–12"** significa: **3 series, de 10 a 12 repeticiones cada 
 | 2 | **Jalón al pecho** (Lat pulldown) | Jalón al pecho | 3 × 10–12 | 90 s | 2 | Remo sentado en máquina | Jalón agarre neutro en polea | Jala hasta la clavícula, nunca detrás de la nuca. Piensa "codos al bolsillo". |
 | 3 | **Prensa de hombros** (Shoulder press) | Prensa de hombros | 3 × 10–12 | 90 s | 2 | Press de hombro en Smith | Press de hombros con mancuernas | Manijas a la altura de las orejas. No bloquees codos arriba. |
 | 4 | **Remo sentado** (Seated row) | Remo sentado | 3 × 10–12 | 90 s | 2 | Jalón agarre neutro | Remo con mancuerna a un brazo | Cojín en el esternón. No jales con la espalda redondeada. |
-| 5 | **Extensión de tríceps en polea** (Triceps pushdown) | Torre de poleas | 2 × 12–15 | 60 s | 1 | Prensa de tríceps en máquina | Extensión sobre la cabeza con mancuerna | Codos pegados al costado, quietos. Solo se mueve el antebrazo. |
-| 6 | **Curl de bíceps** (Arm curl) | Curl de bíceps en máquina | 2 × 12–15 | 60 s | 1 | Curl de bíceps en polea | Curl martillo con mancuernas | Sin impulso de espalda. Baja en 3 segundos. |
+| 5 | **Dominadas asistidas** (Machine-assisted pull-up) *(nuevo en v2.0)* | Máquina de dominadas/fondos asistidos | 3 × 6–10 | 90 s | 3 | Jalón al pecho | Curl de bíceps en máquina | La placa es la AYUDA: más placa = más fácil. Baja los hombros antes de jalar; barbilla sobre la barra, brazos estirados abajo. |
+| 6 | **Extensión de tríceps en polea** (Triceps pushdown) | Torre de poleas | 3 × 12–15 | 60 s | 1 | Prensa de tríceps en máquina | Extensión sobre la cabeza con mancuerna | Codos pegados al costado, quietos. Solo se mueve el antebrazo. |
 
 **Enfriamiento (8 min):** pectoral en marco de puerta 2×30 s/lado · dorsal colgado del jalón 2×30 s · cuello y trapecio 2×20 s/lado · rotación torácica 10/lado · 1 min de respiración.
 
 ### MIÉRCOLES — Cardio + core + movilidad
-**Calentamiento 5 min · Cardio 28 min · Core 12 min · Movilidad 10 min**
+**Calentamiento 5 min · Cardio 28 min · Core 15 min · Movilidad 10 min**
 
 Día ligero, en día de oficina. Casi no compite por equipo, así que sirve igual de bien a la 1:15 PM que a las 8:30 PM.
 
@@ -337,29 +339,31 @@ Día ligero, en día de oficina. Casi no compite por equipo, así que sirve igua
 |---|---|---|---|
 | 1 | Calentamiento | Caminadora plana, ritmo cómodo | 5 min |
 | 2 | **Cardio zona 2** | Caminadora con inclinación 8–10% a 5–5.5 km/h · o bici estática · o escaladora | **28 min continuos.** Debes poder hablar en frases completas pero no cantar. En FC, guíate por la zona 2 de tu Apple Watch. |
-| 3 | Core | Plancha frontal 3 × 20–40 s · Muerto bicho 3 × 8/lado · Pallof press en polea 2 × 10/lado | 12 min, 60 s de descanso |
+| 3 | Core | Plancha frontal 3 × 20–40 s · Muerto bicho 3 × 8/lado · Pallof press en polea 3 × 10/lado | 15 min, 60 s de descanso |
 | 4 | Movilidad | Isquiotibiales sentado 3×30 s/lado · flexor de cadera 3×30 s/lado · sentadilla profunda asistida 3×20 s · torácica en cuadrupedia 10/lado · gato-camello 10 | 10 min |
 
 **El bloque de movilidad no es relleno.** No poder tocarte la punta de los pies limita directamente la sentadilla, el peso muerto rumano y la extensión de espalda. Este es el día que arregla eso, y es la razón por la que este día existe en vez de un cuarto día de pesas.
 
 ### JUEVES — Tren inferior B
-**Calentamiento 8 min · Bloque principal 34 min · Cardio 12 min · Enfriamiento 6 min**
+**Calentamiento 8 min · Bloque principal 35 min · Cardio 10 min · Enfriamiento 6 min**
+
+*Este día va justo de tiempo: si el bloque principal se alarga, recorta el cardio a 10 min sin culpa.*
 
 Mismo calentamiento del lunes.
 
 | # | Ejercicio | Equipo | Series × reps | Desc. | RIR | Alt A (máquina) | Alt B (mancuerna/polea) | Nota de técnica |
 |---|---|---|---|---|---|---|---|---|
 | 1 | **Prensa de piernas, pies altos** (Leg press, high foot placement) | Prensa de piernas | 3 × 12–15 | 90 s | 3 | Sentadilla en Smith | Sentadilla copa con mancuerna | Pies más arriba y un poco más separados que el lunes: pega más al glúteo e isquio. Es el mismo aparato, otra posición. |
-| 2 | **Peso muerto rumano con mancuernas** (Dumbbell RDL) *(desde semana 4)* | Mancuernas | 3 × 10–12 | 90 s | 3 | Extensión de espalda | Puente de glúteo en el piso | **Semanas 1–3: sustitúyelo por extensión de espalda** (mismas series que el resto de la fase: 2 en las semanas 1–2, 3 en la semana 3), 12–15 reps. Rodillas casi rectas, manda la cadera atrás, baja solo hasta donde la espalda siga plana. Con tu flexibilidad actual eso va a ser arriba de la rodilla, y está bien. |
-| 3 | **Curl femoral sentado** (Seated leg curl) | Curl de piernas sentado | 3 × 12–15 | 60 s | 2 | Máquina de glúteos | Puente de glúteo a una pierna | Baja lento, 3 segundos. |
-| 4 | **Máquina de glúteos** (Glute machine) | Máquina de glúteos | 2 × 12–15 | 60 s | 2 | Abductor de cadera | Puente de glúteo con mancuerna | Aprieta arriba 1 segundo. Sin arquear la espalda baja. |
-| 5 | **Elevación de talones en Smith** (Smith calf raise) | Smith | 2 × 12–15 | 60 s | 1 | Prensa de piernas (empuje con puntas) | Elevación de talones con mancuerna | Rango completo: baja hasta estirar, sube hasta la punta. Pausa 1 s arriba. |
-| 6 | **Contracción abdominal** (Ab crunch) | Contracción abdominal | 2 × 12–15 | 60 s | 1 | Rotación de torso | Plancha frontal 3 × 30 s | Control, no impulso. Exhala al contraer. |
+| 2 | **Peso muerto rumano con mancuernas** (Dumbbell RDL) | Mancuernas | 3 × 10–12 | 90 s | 3 | Extensión de espalda | Puente de glúteo en el piso | Rodillas casi rectas, manda la cadera atrás, baja solo hasta donde la espalda siga plana. Con tu flexibilidad actual eso va a ser arriba de la rodilla, y está bien. |
+| 3 | **Hip thrust en Smith** (Smith hip thrust) *(nuevo en v2.0)* | Smith + banca + cojín | 3 × 10–12 | 90 s | 3 | Máquina de glúteos | Puente de glúteo en el piso | Espalda alta en la banca, barra sobre la cadera CON cojín. Empuja con talones, aprieta arriba 1 s sin arquear la espalda baja. Primeras 2 sesiones solo la barra. |
+| 4 | **Curl femoral sentado** (Seated leg curl) | Curl de piernas sentado | 3 × 12–15 | 60 s | 2 | Máquina de glúteos | Puente de glúteo a una pierna | Baja lento, 3 segundos. |
+| 5 | **Elevación de talones en Smith** (Smith calf raise) | Smith | 3 × 12–15 | 60 s | 1 | Prensa de piernas (empuje con puntas) | Elevación de talones con mancuerna | Rango completo: baja hasta estirar, sube hasta la punta. Pausa 1 s arriba. |
+| 6 | **Contracción abdominal** (Ab crunch) | Contracción abdominal | 3 × 12–15 | 60 s | 1 | Rotación de torso | Plancha frontal 3 × 30 s | Control, no impulso. Exhala al contraer. |
 
 **Cardio (12 min):** zona 2. **Enfriamiento (6 min):** igual que el lunes, con énfasis en isquiotibiales.
 
 ### VIERNES — Tren superior B
-**Calentamiento 8 min · Bloque principal 44 min · Enfriamiento 8 min**
+**Calentamiento 8 min · Bloque principal 37 min · Enfriamiento 8 min**
 
 Mismo calentamiento del martes.
 
@@ -368,9 +372,9 @@ Mismo calentamiento del martes.
 | 1 | **Press de banca en Smith** (Smith bench press) | Smith + banca | 3 × 8–10 | 90 s | 3 | Prensa de pecho en máquina | Press con mancuernas en banca | La barra toca a la altura de la parte baja del pecho. Codos a ~45°. Pies firmes en el piso. |
 | 2 | **Jalón agarre neutro** (Neutral-grip pulldown) | Jalón al pecho | 3 × 10–12 | 90 s | 2 | Remo sentado | Jalón en torre de poleas con agarre en V | Agarre con las palmas enfrentadas. Menos estrés de hombro que el agarre abierto. |
 | 3 | **Remo con mancuerna a un brazo** (One-arm dumbbell row) | Mancuernas + banca | 3 × 10–12/lado | 90 s | 2 | Remo sentado en máquina | Remo en polea baja a un brazo | Apoya rodilla y mano en la banca. Espalda plana, jala el codo hacia la cadera. |
-| 4 | **Elevaciones laterales** (Lateral raises) | Mancuernas | 3 × 12–15 | 60 s | 1 | Prensa de hombros | Elevación lateral en polea | Peso ligero, en serio. Sube hasta la altura del hombro, no más. Sin impulso. |
-| 5 | **Curl martillo** (Hammer curl) | Mancuernas | 2 × 10–12 | 60 s | 1 | Curl de bíceps en máquina | Curl de bíceps en polea | Palmas enfrentadas todo el recorrido. Codos quietos. |
-| 6 | **Prensa de tríceps** (Triceps press) | Prensa de tríceps en máquina | 2 × 12–15 | 60 s | 1 | Extensión de tríceps en polea | Extensión sobre la cabeza con mancuerna | Rango completo. Sin rebote al final. |
+| 4 | **Fondos asistidos** (Machine-assisted dip) *(nuevo en v2.0)* | Máquina de dominadas/fondos asistidos | 3 × 6–10 | 90 s | 3 | Prensa de tríceps en máquina | Extensión de tríceps en polea | Misma máquina que las dominadas. Codos hacia atrás, baja solo hasta que el hombro llegue al codo. Más placa = más ayuda. |
+| 5 | **Elevaciones laterales** (Lateral raises) | Mancuernas | 3 × 12–15 | 60 s | 1 | Prensa de hombros | Elevación lateral en polea | Peso ligero, en serio. Sube hasta la altura del hombro, no más. Sin impulso. |
+| 6 | **Curl martillo** (Hammer curl) | Mancuernas | 3 × 10–12 | 60 s | 1 | Curl de bíceps en máquina | Curl de bíceps en polea | Palmas enfrentadas todo el recorrido. Codos quietos. |
 
 *Si te sobran 4 min:* 1 × 15 en apertura de deltoide posterior (rear delt fly).
 
@@ -400,11 +404,11 @@ Cada renglón es un bloque de **Repeticiones** en la app (el campo con el icono 
 
 | Día | Bloque 1 | Bloque 2 | Pasos extra |
 |---|---|---|---|
-| **Lunes** (Inferior A) | ⟳ **6** · Ejercicio Libre + Recuperación **90 s** | ⟳ **7** · Ejercicio Libre + Recuperación **60 s** | Ejercicio Tiempo **12 min** (cardio) · Enfriamiento Tiempo **6 min** |
-| **Martes** (Superior A) | ⟳ **12** · Ejercicio Libre + Recuperación **90 s** | ⟳ **4** · Ejercicio Libre + Recuperación **60 s** | Enfriamiento Tiempo **8 min** |
-| **Miércoles** (Cardio) | Ejercicio **Libre** (cardio zona 2) | ⟳ **8** · Ejercicio Libre + Recuperación **60 s** (core) | Enfriamiento Tiempo **10 min** (movilidad) |
-| **Jueves** (Inferior B) | ⟳ **6** · Ejercicio Libre + Recuperación **90 s** | ⟳ **9** · Ejercicio Libre + Recuperación **60 s** | Ejercicio Tiempo **12 min** (cardio) · Enfriamiento Tiempo **6 min** |
-| **Viernes** (Superior B) | ⟳ **9** · Ejercicio Libre + Recuperación **90 s** | ⟳ **7** · Ejercicio Libre + Recuperación **60 s** | Enfriamiento Tiempo **8 min** |
+| **Lunes** (Inferior A) | ⟳ **9** · Ejercicio Libre + Recuperación **90 s** | ⟳ **6** · Ejercicio Libre + Recuperación **60 s** | Ejercicio Tiempo **12 min** (cardio) · Enfriamiento Tiempo **6 min** |
+| **Martes** (Superior A) | ⟳ **15** · Ejercicio Libre + Recuperación **90 s** | ⟳ **3** · Ejercicio Libre + Recuperación **60 s** | Enfriamiento Tiempo **8 min** |
+| **Miércoles** (Cardio) | Ejercicio **Libre** (cardio zona 2) | ⟳ **9** · Ejercicio Libre + Recuperación **60 s** (core) | Enfriamiento Tiempo **10 min** (movilidad) |
+| **Jueves** (Inferior B) | ⟳ **9** · Ejercicio Libre + Recuperación **90 s** | ⟳ **9** · Ejercicio Libre + Recuperación **60 s** | Ejercicio Tiempo **10 min** (cardio) · Enfriamiento Tiempo **6 min** |
+| **Viernes** (Superior B) | ⟳ **12** · Ejercicio Libre + Recuperación **90 s** | ⟳ **6** · Ejercicio Libre + Recuperación **60 s** | Enfriamiento Tiempo **8 min** |
 
 **Los ejercicios marcados "/lado" cuentan como UNA serie.** El remo con mancuerna a un brazo, el Pallof press y el muerto bicho se hacen de los dos lados *antes* de tocar para descansar. Un lado no es una serie.
 
