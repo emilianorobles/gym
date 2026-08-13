@@ -2,15 +2,27 @@
 // los datos viven en plan-emi.json y se cargan aquí.
 // Secciones: carga · estado · tema · hápticos · plantillas · render · interacción.
 
-fetch('./plan-emi.json')
-  .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-  .then(iniciar)
-  .catch(err=>{
-    document.getElementById('main').innerHTML=
-      `<article class="card"><h2 style="margin:0 0 8px;font-size:18px">No pude cargar el plan</h2>
+// Dos fallas distintas, dos mensajes distintos: no bajó el JSON (red) vs. sí bajó
+// pero algo tronó al dibujar (dato guardado raro). La segunda se arregla sola con
+// el botón: borra los ordenes guardados —lo único reconstruible— y recarga.
+function limpiaOrden(){
+  try{ Object.keys(localStorage).filter(k=>k.startsWith('o|')).forEach(k=>localStorage.removeItem(k)) }catch(e){}
+  location.reload();
+}
+function falla(err, alDibujar){
+  document.getElementById('main').innerHTML = alDibujar
+    ? `<article class="card"><h2 style="margin:0 0 8px;font-size:18px">El plan cargó, pero no pude dibujarlo</h2>
+      <p class="eq" style="margin:0 0 12px">Suele ser el orden de ejercicios que guardaste. Bórralo y sigue: tus pesos y lo que llevas marcado no se tocan. (${err.message})</p>
+      <button class="reset" onclick="limpiaOrden()">Restaurar orden y recargar</button></article>`
+    : `<article class="card"><h2 style="margin:0 0 8px;font-size:18px">No pude cargar el plan</h2>
       <p class="eq" style="margin:0 0 12px">Si estás sin señal, la app necesita abrirse una vez con internet para guardarse. Después ya funciona sin conexión. (${err.message})</p>
       <button class="reset" onclick="location.reload()">Reintentar</button></article>`;
-  });
+}
+
+fetch('./plan-emi.json')
+  .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(DATA=>{ try{ iniciar(DATA) }catch(err){ falla(err,true) } })
+  .catch(err=>falla(err,false));
 
 if('serviceWorker' in navigator && location.protocol!=='file:')
   addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
@@ -167,12 +179,18 @@ function render(restaurar){
     slot++; const esFuerza=b.tipo==='principal'; const orig=EX[rawId];
     items.push({slot, esFuerza, orig, badge: esFuerza?String(++num).padStart(2,'0'):AUX[b.tipo]});
   }));
-  const guardado = JSON.parse(lee(kOrd(dia))||'null');
-  if(guardado){
-    const fuerza = items.filter(i=>i.esFuerza);
-    const ord = guardado.filter(s=>fuerza.some(i=>i.slot===s))
-              .concat(fuerza.filter(i=>!guardado.includes(i.slot)).map(i=>i.slot));
-    let k=0; items = items.map(i=> i.esFuerza ? fuerza.find(f=>f.slot===ord[k++]) : i);
+  // El orden guardado es una lista de slots de fuerza. Se sanea contra el plan de
+  // hoy (el plan cambia; los slots viejos pueden ya no existir) y solo se aplica si
+  // queda una permutacion completa: si algo no cuadra se ignora, nunca se rompe.
+  let guardado = null; try{ guardado = JSON.parse(lee(kOrd(dia))||'null') }catch(e){}
+  if(Array.isArray(guardado)){
+    const fuerza = items.filter(i=>i.esFuerza), slots = fuerza.map(f=>f.slot);
+    const ord = [...new Set(guardado.filter(s=>slots.includes(s)))]
+              .concat(slots.filter(s=>!guardado.includes(s)));
+    const reord = ord.map(s=>fuerza.find(f=>f.slot===s));
+    if(reord.length===fuerza.length && reord.every(Boolean)){
+      let k=0; items = items.map(i=> i.esFuerza ? reord[k++] : i);
+    }else borra(kOrd(dia));
   }
   main.classList.toggle('anima', animar && !menosMovimiento()); animar=false;
   main.innerHTML = items.map((it,ix)=>tarjeta(it.orig,it.slot,it.esFuerza,it.badge,ix)).join('');
